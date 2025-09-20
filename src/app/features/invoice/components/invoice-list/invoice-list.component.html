@@ -1,0 +1,13 @@
+<div>
+  <h2>Mis Facturas</h2>
+  <div *ngIf="invoices.length > 0">
+    <ul>
+      <li *ngFor="let invoice of invoices">
+        <a [routerLink]="['/invoices', invoice.id]">Factura #{{ invoice.id }} - {{ invoice.date }}</a>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="invoices.length === 0">
+    <p>No tienes facturas aún.</p>
+  </div>
+</div>

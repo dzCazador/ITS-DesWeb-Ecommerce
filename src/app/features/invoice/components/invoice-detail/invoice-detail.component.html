@@ -1,0 +1,15 @@
+<div *ngIf="invoice">
+  <h2>Factura #{{ invoice.id }}</h2>
+  <p>Fecha: {{ invoice.date }}</p>
+  <p>Total: ${{ invoice.total }}</p>
+
+  <h3>Productos:</h3>
+  <ul>
+    <li *ngFor="let product of invoice.products">
+      {{ product.name }} ({{ product.quantity }})
+    </li>
+  </ul>
+</div>
+<div *ngIf="!invoice">
+  <p>Factura no encontrada.</p>
+</div>

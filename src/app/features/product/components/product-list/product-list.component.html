@@ -1,0 +1,15 @@
+<div>
+  <h2>Lista de Productos</h2>
+  <div *ngIf="products.length > 0">
+    <ul>
+      <li *ngFor="let product of products">
+        <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
+        - ${{ product.price }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="products.length === 0">
+    <p>No se encontraron productos.</p>
+  </div>
+
+</div>

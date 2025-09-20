@@ -1,11 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, RouterLink],
+  template: `
+    <nav>
+      <ul>
+        <li><a routerLink="/invoices">Facturas</a></li>
+        <li><a routerLink="/products">Productos</a></li>
+        <li><a routerLink="/cart">Carrito</a></li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/register">Registro</a></li>
+      </ul>
+    </nav>
+    <router-outlet></router-outlet>
+  `,
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'its-desweb-ecommerce-app';
