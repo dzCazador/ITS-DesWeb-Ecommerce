@@ -12,8 +12,8 @@ import { RouterOutlet, RouterLink } from '@angular/router';
         <li><a routerLink="/invoices">Facturas</a></li>
         <li><a routerLink="/products">Productos</a></li>
         <li><a routerLink="/cart">Carrito</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Registro</a></li>
+        <li><a routerLink="/auth/login">Login</a></li>
+        <li><a routerLink="/auth/register">Registro</a></li>
       </ul>
     </nav>
     <router-outlet></router-outlet>

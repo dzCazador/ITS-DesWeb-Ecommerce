@@ -1,10 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 
-const routes: Routes = [];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class InvoiceRoutingModule { }
+export const INVOICE_ROUTES: Routes = [
+  {
+    path: '',
+    component: InvoiceListComponent
+  },
+  {
+    path: ':id',
+    component: InvoiceDetailComponent
+  }
+];

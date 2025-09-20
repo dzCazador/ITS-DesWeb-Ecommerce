@@ -3,7 +3,7 @@
   <div *ngIf="cart.products.length > 0">
     <ul>
       <li *ngFor="let item of cart.products">
-        {{ item.name }} - Cantidad: {{ item.quantity }}
+        {{ item.name }} - Cantidad: {{ item.quantity }} - Precio: {{ item.price }}
       </li>
     </ul>
     <button (click)="finalizePurchase()">Finalizar Compra</button>

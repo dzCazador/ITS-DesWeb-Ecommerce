@@ -12,17 +12,24 @@ export class InvoiceService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getMyInvoices(): Observable<any[]> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-    return this.http.get<any[]>(`${this.apiUrl}`, { headers });
+  /**
+   * Retrieves all invoices.
+   * @returns {Observable<any[]>} Array of invoice data.
+   */
+  getInvoices(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
+  /**
+   * Retrieves an invoice by id.
+   * Requires authentication.
+   * @param id The id of the invoice to retrieve.
+   * @returns Observable<any> - The invoice data.
+   */
   getInvoiceById(id: string): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}`
     });
-    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 }

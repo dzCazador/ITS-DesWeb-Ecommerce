@@ -3,11 +3,16 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from './auth.service';
 
+/**
+ * An Angular HTTP interceptor that adds a JWT token to requests.
+ * The token is obtained from the AuthService.
+ * If the token is not present, the request is not modified.
+ * @see AuthService
+ * @see HttpInterceptorFn
+ */
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const token = authService.getToken();
-  console.log("El token es:", token);
-
   if (token) {
     const cloned = req.clone({
       setHeaders: {

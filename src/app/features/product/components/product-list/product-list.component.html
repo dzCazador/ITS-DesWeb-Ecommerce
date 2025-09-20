@@ -4,7 +4,7 @@
     <ul>
       <li *ngFor="let product of products">
         <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
-        - ${{ product.price }}
+        - ${{ product.price }} - Stock: {{ product.stock }}
       </li>
     </ul>
   </div>

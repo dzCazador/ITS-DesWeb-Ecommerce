@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { environment } from 'src/common/environment'; // <-- Importa el archivo
+import { environment } from 'src/common/environment';
 
 
 @Injectable({
@@ -19,10 +19,7 @@ export class CartService {
    * @returns Observable<any> - The current user's cart.
    */
   getUserCart(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-    return this.http.get<any>(`${this.apiUrl}/me`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/me`);
   }
 
   /**
@@ -32,10 +29,7 @@ export class CartService {
    * @returns Observable<any> - La respuesta del servidor.
    */
   addProductToCart(product: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-    return this.http.post<any>(`${this.apiUrl}/me/add`, product, { headers });
+    return this.http.post<any>(`${this.apiUrl}/me/add`, product);
   }
 
   /**
@@ -45,11 +39,8 @@ export class CartService {
    * @returns Observable<any> - La respuesta del servidor.
    */
   removeProductFromCart(product: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
     // Para las solicitudes DELETE con cuerpo, se debe usar la propiedad 'body' en las opciones de la petición.
-    return this.http.delete<any>(`${this.apiUrl}/me/remove`, { body: product, headers });
+    return this.http.delete<any>(`${this.apiUrl}/me/remove`, { body: product });
   }
 
   /**
@@ -58,9 +49,6 @@ export class CartService {
    * @returns Observable<any> - La respuesta del servidor.
    */
   finalizeCart(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-    return this.http.post<any>(`${this.apiUrl}/me/finalize`, {}, { headers });
+    return this.http.post<any>(`${this.apiUrl}/me/finalize`, {});
   }
 }

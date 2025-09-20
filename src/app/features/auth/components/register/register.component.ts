@@ -28,6 +28,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Register a user and redirect to login page on success
+   */
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.userService.registerUser(this.registerForm.value).subscribe({

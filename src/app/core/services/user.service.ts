@@ -13,7 +13,8 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   registerUser(userData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, userData);
+    const newUserData = { ...userData, role: 'USER' };
+    return this.http.post<any>(this.apiUrl, newUserData);
   }
 
   getProfile(): Observable<any> {

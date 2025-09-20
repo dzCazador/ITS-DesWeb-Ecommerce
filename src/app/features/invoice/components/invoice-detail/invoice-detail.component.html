@@ -1,6 +1,6 @@
 <div *ngIf="invoice">
   <h2>Factura #{{ invoice.id }}</h2>
-  <p>Fecha: {{ invoice.date }}</p>
+  <p>Fecha: {{ invoice.createdAt }}</p>
   <p>Total: ${{ invoice.total }}</p>
 
   <h3>Productos:</h3>
