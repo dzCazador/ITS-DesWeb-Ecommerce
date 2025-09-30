@@ -6,7 +6,7 @@
   <h3>Productos:</h3>
   <ul>
     <li *ngFor="let product of invoice.products">
-      {{ product.name }} ({{ product.quantity }})
+      {{ product.name }} ({{ product.quantity }} - ${{ product.price }})
     </li>
   </ul>
 </div>
