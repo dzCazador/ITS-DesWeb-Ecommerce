@@ -1,8 +1,10 @@
+import { tap,Observable,BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 import { environment } from 'src/common/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,15 @@ export class AuthService {
   private apiUrl = `${environment.apiUrl}/auth`;
   private tokenKey = 'jwt_token';
 
-  constructor(private http: HttpClient) {}
+  private userSubject = new BehaviorSubject<any | null>(null);
+  public user$ = this.userSubject.asObservable(); // Observable público
+  public isAuthenticated$ = new BehaviorSubject<boolean>(this.hasToken());
+
+  constructor(
+      private http: HttpClient,
+      private router: Router) {
+    this.loadUserFromToken(); // Cargar usuario al iniciar el servicio
+  }
 
   /**
    * Logs in a user with the given credentials.
@@ -26,6 +36,8 @@ export class AuthService {
         if (response && response.access_token) {
           console.log('Login response:', response.access_token);
           localStorage.setItem(this.tokenKey, response.access_token);
+          this.loadUserFromToken();
+          this.isAuthenticated$.next(true);
         }
       })
     );
@@ -38,14 +50,17 @@ export class AuthService {
  */
   logout(): void {
     localStorage.removeItem(this.tokenKey);
+    this.userSubject.next(null);
+    this.isAuthenticated$.next(false);
+    this.router.navigate(['/']);
   }
 
 /**
  * Retrieves the JWT token from local storage, if it exists.
  * @returns The JWT token if it exists, or null otherwise.
 */
- getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+  getToken(): string | null {
+      return localStorage.getItem(this.tokenKey);
   }
 
 /**
@@ -53,8 +68,37 @@ export class AuthService {
  * Returns true if a token exists, and false otherwise.
  * @returns {boolean} True if a token exists, false otherwise.
  */
-  isAuthenticated(): boolean {
-    const token = this.getToken();
-    return !!token;
+  private hasToken(): boolean {
+    return !!localStorage.getItem('accessToken');
   }
+  private loadUserFromToken(): void {
+    const token = this.getToken();
+    if (token) {
+      try {
+          // 1. Split the token into its three parts.
+          const tokenParts = token.split('.');
+
+          // 2. A JWT must have exactly three parts.
+          if (tokenParts.length !== 3) {
+            throw new Error('Invalid JWT format.');
+          }
+
+          // 3. Select the payload, which is the second part (index 1).
+          const payload = tokenParts[1];
+
+          // 4. Decode the Base64 payload into a JSON string.
+          const decodedPayload = atob(payload);
+
+          // 5. Parse the JSON string into a usable JavaScript object.
+          const user = JSON.parse(decodedPayload);
+
+          // 6. Update the application's state with the user data.
+          this.userSubject.next(user);
+      } catch (e) {
+        console.error("Error decodificando el token", e);
+        this.userSubject.next(null);
+      }
+    }
+  }
+
 }

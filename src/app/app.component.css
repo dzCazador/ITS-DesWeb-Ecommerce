@@ -1,0 +1,124 @@
+.spacer {
+  flex: 1 1 auto; /* Empuja los elementos de la toolbar a los extremos */
+}
+
+.content {
+  padding: 24px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre las tarjetas */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product-card {
+  width: 300px;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Roboto', sans-serif; /* Asegura que se use la tipografía de Material */
+}
+
+.app-footer {
+  background-color: #f5f5f5; /* Un gris muy claro, típico de Material Design */
+  color: rgba(0, 0, 0, 0.6); /* Color de texto secundario */
+  padding: 40px 24px;
+  margin-top: 48px; /* Espacio para separar el footer del contenido principal */
+  border-top: 1px solid #e0e0e0; /* Una línea sutil de separación */
+}
+
+/* Contenedor que organiza las secciones del footer */
+.footer-content {
+  max-width: 1200px; /* Ancho máximo para que no se estire demasiado en pantallas grandes */
+  margin: 0 auto; /* Centra el contenido */
+  display: flex;
+  flex-wrap: wrap; /* Permite que las secciones se reorganicen en pantallas pequeñas */
+  justify-content: space-between; /* Distribuye el espacio entre las secciones */
+  gap: 20px; /* Espacio entre las secciones */
+}
+
+/* Estilo para cada sección individual del footer */
+.footer-section {
+  flex: 1; /* Permite que las secciones crezcan y ocupen el espacio disponible */
+  min-width: 250px; /* Ancho mínimo antes de que se reorganicen */
+}
+
+.footer-section h4 {
+  color: rgba(0, 0, 0, 0.87); /* Color de texto principal para los títulos */
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.footer-section p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Estilo para la lista de enlaces de navegación */
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #3f51b5; /* Color primario del tema por defecto de Material */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+  color: #303f9f; /* Un tono más oscuro del color primario */
+}
+
+/* Estilo para los íconos de redes sociales */
+.social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.social-icons a {
+  color: rgba(0, 0, 0, 0.54);
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #3f51b5; /* Cambia a color primario en hover */
+}
+
+/* Estilo para el contenedor del logo/marca */
+.navbar-brand {
+  display: flex; /* Alinea el ícono y el texto horizontalmente */
+  align-items: center; /* Centra verticalmente el ícono y el texto */
+  gap: 8px; /* Espacio entre el ícono y el texto */
+
+  text-decoration: none; /* Quita el subrayado por defecto de los enlaces */
+
+  padding: 8px 12px; /* Espaciado interno para hacerlo más "clickeable" */
+  border-radius: 4px; /* Bordes redondeados sutiles */
+
+  transition: background-color 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+/* Efecto al pasar el cursor por encima */
+.navbar-brand:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Un resaltado sutil */
+}
+
+/* Ajuste del tamaño del ícono del logo */
+.navbar-logo-icon {
+  /* Opcional: ajusta el tamaño si es necesario */
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}

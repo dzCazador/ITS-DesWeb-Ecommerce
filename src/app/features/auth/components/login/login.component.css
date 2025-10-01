@@ -1,0 +1,20 @@
+/* Estilo para el contenedor del enlace de registro */
+.register-link {
+  padding: 16px 24px; /* Añade espaciado consistente con los diálogos de Material */
+  text-align: center; /* Centra el texto */
+  font-size: 14px; /* Tamaño de fuente estándar */
+  color: rgba(0, 0, 0, 0.6); /* Un color de texto sutil, no tan fuerte como el negro puro */
+}
+
+/* Estilo específico para el enlace (<a>) dentro del contenedor */
+.register-link a {
+  font-weight: 500; /* Hace que el enlace sea un poco más grueso (semi-bold) */
+  text-decoration: none; /* Quita el subrayado por defecto */
+  color: #3f51b5; /* Usa el color primario del tema por defecto de Material (indigo) */
+                  /* Puedes cambiarlo por var(--primary-color) si tienes CSS variables */
+}
+
+/* Efecto hover para el enlace, para mejorar la interactividad */
+.register-link a:hover {
+  text-decoration: underline; /* Añade el subrayado solo cuando el cursor está encima */
+}

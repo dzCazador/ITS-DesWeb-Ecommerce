@@ -1,15 +1,25 @@
-<div>
-  <h2>Lista de Productos</h2>
-  <div *ngIf="products.length > 0">
-    <ul>
-      <li *ngFor="let product of products">
-        <a [routerLink]="['/products', product.id]">{{ product.name }}</a>
-        - ${{ product.price }} - Stock: {{ product.stock }}
-      </li>
-    </ul>
-  </div>
-  <div *ngIf="products.length === 0">
-    <p>No se encontraron productos.</p>
-  </div>
+<div class="product-grid">
+  <mat-card class="product-card" *ngFor="let product of products">
+    <img mat-card-image *ngIf="product.imageUrl; else genericIcon" [src]="product.imageUrl" [alt]="product.name">
+    <ng-template #genericIcon>
+      <div class="generic-icon-wrapper">
+        <mat-icon>category</mat-icon>
+      </div>
+    </ng-template>
+    <mat-card-header>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.price | currency:'$' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ product.description }}</p>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="addToCart(product)">AGREGAR AL CARRITO</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
 
+<!-- Mensaje opcional si no hay productos -->
+<div *ngIf="products.length === 0" class="no-products-message">
+  <p>No hay productos para mostrar en este momento.</p>
 </div>

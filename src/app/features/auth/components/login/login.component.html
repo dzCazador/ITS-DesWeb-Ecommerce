@@ -1,21 +1,47 @@
-<div>
-  <h2>Iniciar Sesión</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="email">Email:</label>
-      <input id="email" type="email" formControlName="email" required>
-      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-        Se requiere un email válido.
-      </div>
-    </div>
-    <div>
-      <label for="password">Contraseña:</label>
-      <input id="password" type="password" formControlName="password" required>
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+<!-- Título del diálogo, gestionado por MatDialog -->
+<h2 mat-dialog-title>Iniciar Sesión</h2>
+
+<!-- Contenido principal del diálogo -->
+<mat-dialog-content>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="loginForm">
+    <br/>
+
+    <!-- Campo de Correo Electrónico -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="email" type="email" placeholder="ejemplo@correo.com">
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        El correo es requerido.
+      </mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+        El formato del correo no es válido.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo de Contraseña -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" type="password">
+      <mat-icon matSuffix>lock</mat-icon>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
         La contraseña es requerida.
-      </div>
-    </div>
-    <button type="submit" [disabled]="!loginForm.valid">Acceder</button>
+      </mat-error>
+    </mat-form-field>
+
   </form>
-  <p>¿No tienes una cuenta? <a routerLink="/register">Regístrate aquí</a>.</p>
+</mat-dialog-content>
+
+<!-- Acciones (botones) del diálogo -->
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <!-- El botón de submit está fuera del <form> pero lo activa con el atributo 'form' -->
+  <button mat-raised-button color="primary" type="submit" form="loginForm" [disabled]="!loginForm.valid">
+    Acceder
+  </button>
+</mat-dialog-actions>
+
+<!-- Enlace de registro (opcional, puede ir en mat-dialog-content) -->
+<div class="register-link">
+  ¿No tienes una cuenta? <a href="#" (click)="$event.preventDefault();">Regístrate aquí</a>.
 </div>
